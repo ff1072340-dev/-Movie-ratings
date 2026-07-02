@@ -58,3 +58,33 @@ document.addEventListener("input", (e)=>{
 function openMovie(id){
   window.location.href = `movie.html?id=${id}`;
 }
+async function loadMovie(){
+
+  const id = new URLSearchParams(window.location.search).get("id");
+
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`);
+  const m = await res.json();
+
+  const trailer = m.videos.results.find(v => v.type === "Trailer");
+
+  document.getElementById("movieDetail").innerHTML = `
+    <div class="detail">
+      <img src="https://image.tmdb.org/t/p/w500${m.poster_path}">
+      <h1>${m.title}</h1>
+      <p>${m.overview}</p>
+
+      <button onclick="playTrailer('${trailer?.key}')">▶ Watch Trailer</button>
+    </div>
+  `;
+}
+
+function playTrailer(key){
+  document.getElementById("trailerModal").style.display = "block";
+  document.getElementById("trailerFrame").src =
+    `https://www.youtube.com/embed/${key}`;
+}
+
+function closeTrailer(){
+  document.getElementById("trailerModal").style.display = "none";
+  document.getElementById("trailerFrame").src = "";
+}
