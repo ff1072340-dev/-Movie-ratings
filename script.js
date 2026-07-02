@@ -1,49 +1,60 @@
 const API_KEY = "7efc7a72b7c648d5e2db136ff41520ad";
 
-// LOAD MULTIPLE CATEGORIES (100+ MOVIES AUTO)
-async function loadAll(){
+let page = 1;
+let currentQuery = "";
 
-  const trending = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=1`);
-  const top = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&page=2`);
-  const upcoming = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&page=1`);
+// INIT
+document.addEventListener("DOMContentLoaded", () => {
+  loadMovies("popular", "trending");
+  loadMovies("top_rated", "toprated");
+  loadMovies("upcoming", "upcoming");
+});
 
-  const t = await trending.json();
-  const r = await top.json();
-  const u = await upcoming.json();
+// LOAD MOVIES (MULTI PAGE = 100+ MOVIES)
+async function loadMovies(type, id, reset=false){
 
-  render("trending", t.results);
-  render("toprated", r.results);
-  render("upcoming", u.results);
-}
+  const url = currentQuery
+    ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${currentQuery}&page=${page}`
+    : `https://api.themoviedb.org/3/movie/${type}?api_key=${API_KEY}&page=${page}`;
 
-// RENDER MOVIES
-function render(id, movies){
-  document.getElementById(id).innerHTML = movies.map(m => `
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const container = document.getElementById(id);
+
+  if(reset) container.innerHTML = "";
+
+  container.innerHTML += data.results.map(m => `
     <div class="movie-card" onclick="openMovie(${m.id})">
       <img src="https://image.tmdb.org/t/p/w500${m.poster_path}">
       <h3>${m.title}</h3>
+      <p>⭐ ${m.vote_average}</p>
     </div>
   `).join("");
 }
 
-// SEARCH (LIVE)
-document.addEventListener("input", async (e)=>{
+// LIVE SEARCH (DEBOUNCED)
+let timer;
+document.addEventListener("input", (e)=>{
   if(e.target.id === "searchInput"){
 
-    const q = e.target.value;
-    if(q.length < 2) return;
+    clearTimeout(timer);
 
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${q}`);
-    const data = await res.json();
+    timer = setTimeout(()=>{
+      currentQuery = e.target.value;
+      page = 1;
 
-    render("trending", data.results);
+      if(currentQuery.length < 2){
+        location.reload();
+        return;
+      }
+
+      loadMovies("popular", "trending", true);
+    }, 500);
   }
 });
 
-// MOVIE PAGE OPEN
+// MOVIE PAGE
 function openMovie(id){
   window.location.href = `movie.html?id=${id}`;
 }
-
-// INIT
-loadAll();
