@@ -1,50 +1,65 @@
 const API_KEY = "7efc7a72b7c648d5e2db136ff41520ad";
 
-const translations = {
-  en: { title: "Discover Amazing Movies", sub: "Watch trailers & trending films" },
-  hi: { title: "शानदार फिल्में देखें", sub: "ट्रेलर और ट्रेंडिंग फिल्में" },
-  ur: { title: "زبردست فلمیں دیکھیں", sub: "ٹریلرز اور ٹرینڈنگ فلمیں" }
-};
+// LOAD MULTIPLE ROWS
+async function loadHome(){
 
-function setLang(lang){
-  document.getElementById("main-title").innerText = translations[lang].title;
-  document.getElementById("sub-title").innerText = translations[lang].sub;
+  const trending = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`);
+  const top = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`);
+
+  const tData = await trending.json();
+  const topData = await top.json();
+
+  renderMovies("trending", tData.results);
+  renderMovies("toprated", topData.results);
 }
 
-async function loadMovies(){
-  const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`);
-  const data = await res.json();
+function renderMovies(id, movies){
+  const container = document.getElementById(id);
 
-  let html = "";
-
-  data.results.forEach(movie=>{
-    const img = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-      : "";
-
-    html += `
-      <div class="movie-card" onclick="openTrailer('${movie.title}')">
-        <img src="${img}">
-        <h3>${movie.title}</h3>
-        <p>⭐ ${movie.vote_average}</p>
-      </div>
-    `;
-  });
-
-  document.getElementById("movie-grid").innerHTML = html;
+  container.innerHTML = movies.map(movie => `
+    <div class="movie-card" onclick="openMovie(${movie.id})">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
+      <h3>${movie.title}</h3>
+    </div>
+  `).join("");
 }
 
-function openTrailer(title){
-  const query = encodeURIComponent(title + " trailer");
-  const url = `https://www.youtube.com/embed?listType=search&list=${query}`;
+// LIVE SEARCH
+document.addEventListener("input", async (e)=>{
+  if(e.target.id === "searchInput"){
 
-  document.getElementById("trailerModal").style.display = "block";
-  document.getElementById("trailerFrame").src = url;
+    const q = e.target.value;
+
+    if(q.length < 2) return;
+
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${q}`);
+    const data = await res.json();
+
+    renderMovies("trending", data.results);
+  }
+});
+
+// MOVIE DETAILS PAGE
+async function openMovie(id){
+  window.location.href = `movie.html?id=${id}`;
 }
 
-function closeTrailer(){
-  document.getElementById("trailerModal").style.display = "none";
-  document.getElementById("trailerFrame").src = "";
+async function loadMovieDetails(){
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if(!id) return;
+
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`);
+  const movie = await res.json();
+
+  document.getElementById("movieDetail").innerHTML = `
+    <h1>${movie.title}</h1>
+    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
+    <p>${movie.overview}</p>
+  `;
 }
 
-loadMovies();
+if(document.getElementById("trending")) loadHome();
+if(document.getElementById("movieDetail")) loadMovieDetails();
