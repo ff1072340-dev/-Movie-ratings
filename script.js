@@ -1,36 +1,30 @@
 const API_KEY = "7efc7a72b7c648d5e2db136ff41520ad";
 
-const API_URL =
-`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-
 async function loadMovies() {
 
-const response = await fetch(API_URL);
-const data = await response.json();
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+  );
 
-const grid = document.querySelector(".movie-grid");
+  const data = await response.json();
 
-if (!grid) return;
+  const grid = document.getElementById("movie-grid");
 
-grid.innerHTML = "";
+  if (!grid) return;
 
-data.results.slice(0,12).forEach(movie=>{
+  grid.innerHTML = "";
 
-grid.innerHTML += `
-<div class="movie-card">
+  data.results.forEach(movie => {
 
-<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+    grid.innerHTML += `
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+        <h3>${movie.title}</h3>
+        <p>⭐ ${movie.vote_average}</p>
+      </div>
+    `;
 
-<h3>${movie.title}</h3>
-
-<p>⭐ ${movie.vote_average}</p>
-
-<p>${movie.release_date}</p>
-
-</div>
-`;
-
-});
+  });
 
 }
 
