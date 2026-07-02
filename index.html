@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CineVerse - Movies & Trailers</title>
-
-<meta name="description" content="Watch trending movies, trailers, ratings and reviews on CineVerse.">
-<meta name="robots" content="index, follow">
+<title>CineVerse - Netflix Style Movies</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -20,37 +17,18 @@ crossorigin="anonymous"></script>
 <header>
   <div class="logo">🎬 CineVerse</div>
 
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Movies</a>
-  </nav>
-
   <input type="text" id="searchInput" placeholder="Search movies...">
-
-  <div class="lang-switch">
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('hi')">HI</button>
-    <button onclick="setLang('ur')">UR</button>
-  </div>
 </header>
 
 <section class="hero-banner">
-  <h1 id="main-title">Discover Amazing Movies</h1>
-  <p id="sub-title">Watch trailers, ratings & trending films</p>
+  <h1>Discover Movies</h1>
 </section>
 
-<section class="featured">
-  <h2>⭐ Featured</h2>
-  <div class="movie-grid" id="movie-grid"></div>
-</section>
+<h2 class="section-title">🔥 Trending</h2>
+<div class="movie-row" id="trending"></div>
 
-<!-- TRAILER MODAL -->
-<div id="trailerModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeTrailer()">✖</span>
-    <iframe id="trailerFrame" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div>
+<h2 class="section-title">⭐ Top Rated</h2>
+<div class="movie-row" id="toprated"></div>
 
 <script src="script.js"></script>
 
