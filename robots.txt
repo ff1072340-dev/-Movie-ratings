@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ff1072340-dev.github.io/-Movie-ratings/sitemap.xml
