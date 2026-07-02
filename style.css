@@ -1,8 +1,8 @@
 body{
 margin:0;
-font-family:Arial;
 background:#111;
 color:#fff;
+font-family:Arial;
 }
 
 header{
@@ -16,19 +16,13 @@ top:0;
 
 .logo{
 color:red;
-font-size:22px;
 font-weight:bold;
+font-size:22px;
 }
 
 #searchInput{
 padding:8px;
-width:200px;
-}
-
-.hero-banner{
-padding:60px;
-text-align:center;
-background:#222;
+width:250px;
 }
 
 .section-title{
@@ -47,8 +41,6 @@ padding:20px;
 min-width:180px;
 cursor:pointer;
 transition:0.3s;
-background:#1c1c1c;
-border-radius:10px;
 }
 
 .movie-card img{
