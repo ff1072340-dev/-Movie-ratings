@@ -147,3 +147,49 @@ width:180px;
 }
 
 }
+.movie-details{
+display:flex;
+flex-wrap:wrap;
+gap:40px;
+padding:80px 8%;
+align-items:flex-start;
+}
+
+.movie-poster img{
+width:320px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.movie-info{
+flex:1;
+}
+
+.movie-info h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.movie-info p{
+line-height:1.8;
+margin-bottom:15px;
+}
+
+.movie-info h2{
+margin-top:30px;
+margin-bottom:15px;
+}
+
+@media(max-width:768px){
+
+.movie-details{
+flex-direction:column;
+text-align:center;
+}
+
+.movie-poster img{
+width:100%;
+max-width:320px;
+}
+
+}
