@@ -17,21 +17,15 @@ crossorigin="anonymous"></script>
 
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">🎬 CineVerse</div>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="reviews.html">Reviews</a>
-    <a href="movie.html">Movies</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="#">Home</a>
+    <a href="#">Movies</a>
   </nav>
 
-  <div class="search">
-    <input type="text" id="searchInput" placeholder="Search movies...">
-  </div>
+  <input type="text" id="searchInput" placeholder="Search movies...">
 
   <div class="lang-switch">
     <button onclick="setLang('en')">EN</button>
@@ -40,64 +34,23 @@ crossorigin="anonymous"></script>
   </div>
 </header>
 
-<!-- HERO (ONLY ONE) -->
 <section class="hero-banner">
   <h1 id="main-title">Discover Amazing Movies</h1>
   <p id="sub-title">Watch trailers, ratings & trending films</p>
 </section>
 
-<!-- FEATURED -->
 <section class="featured">
-  <h2>⭐ Featured Reviews</h2>
-
-  <div class="movie-grid">
-
-    <div class="movie-card">
-      <img src="images/movie1.jpg" alt="Dune Part Two">
-      <h3>Dune Part Two</h3>
-      <p>⭐⭐⭐⭐⭐</p>
-    </div>
-
-    <div class="movie-card">
-      <img src="images/movie2.jpg" alt="Oppenheimer">
-      <h3>Oppenheimer</h3>
-      <p>⭐⭐⭐⭐⭐</p>
-    </div>
-
-    <div class="movie-card">
-      <img src="images/movie3.jpg" alt="Deadpool">
-      <h3>Deadpool & Wolverine</h3>
-      <p>⭐⭐⭐⭐☆</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- TMDB MOVIES -->
-<section class="trending">
-  <h2>🔥 Popular Movies</h2>
-
+  <h2>⭐ Featured</h2>
   <div class="movie-grid" id="movie-grid"></div>
 </section>
 
-<!-- ABOUT -->
-<section class="featured">
-  <h2>Why CineVerse?</h2>
-  <p>
-    Watch trending movies, trailers, ratings and reviews in one place.
-  </p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 CineVerse</p>
-
-  <p>
-    <a href="about.html">About</a> |
-    <a href="contact.html">Contact</a> |
-    <a href="privacy.html">Privacy Policy</a>
-  </p>
-</footer>
+<!-- TRAILER MODAL -->
+<div id="trailerModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeTrailer()">✖</span>
+    <iframe id="trailerFrame" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
 
 <script src="script.js"></script>
 
