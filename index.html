@@ -3,50 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#e50914">
-  <meta name="googlebot" content="index,follow">
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3998246380817730"
-crossorigin="anonymous"></script>
+
 <title>CineVerse - Honest Movie Reviews, Ratings & Trailers</title>
-  
-<meta name="description" content="Read honest movie reviews, ratings, trailers, cast details, and the latest movie news on CineVerse.">
 
-<meta name="keywords" content="movie reviews, latest movies, hollywood, bollywood, ratings, trailers, cinema">
-
-<meta name="author" content="CineVerse">
-
+<meta name="description" content="Read honest movie reviews, ratings, trailers, cast details, and latest movie news on CineVerse.">
+<meta name="keywords" content="movies, reviews, ratings, trailers, hollywood, bollywood">
 <meta name="robots" content="index, follow">
 
-<meta property="og:title" content="CineVerse - Movie Reviews">
-<meta property="og:description" content="Discover the latest movie reviews and ratings.">
-<meta property="og:type" content="website">
-  <link rel="canonical" href="https://ff1072340-dev.github.io/-Movie-ratings/">
-<meta property="og:image" content="https://ff1072340-dev.github.io/-Movie-ratings/images/movie1.jpg">
-  <meta property="og:url" content="https://ff1072340-dev.github.io/-Movie-ratings/">
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<meta name="application-name" content="CineVerse">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="CineVerse">
 
-<meta name="format-detection" content="telephone=no">
-
-<meta name="referrer" content="strict-origin-when-cross-origin">
-
-<meta name="rating" content="general">
-
-<meta name="language" content="English">
-
-<meta name="revisit-after" content="7 days">
-
-<meta name="distribution" content="global">
-
-<meta name="copyright" content="CineVerse">
-<meta name="creator" content="CineVerse">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3998246380817730"
+crossorigin="anonymous"></script>
 </head>
+
 <body>
+
 <header>
   <div class="logo">🎬 CineVerse</div>
 
@@ -59,113 +30,69 @@ crossorigin="anonymous"></script>
   </nav>
 
   <div class="search">
-    <input type="text" placeholder="Search movies...">
+    <input type="text" id="searchInput" placeholder="Search movies...">
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h1>Discover Amazing Movies</h1>
-  <p>Read honest reviews, ratings and movie news.</p>
-  <a href="reviews.html" class="btn">Explore Reviews</a>
+  <p>Reviews, ratings, trailers & trending films in one place</p>
 </section>
+
+<!-- FEATURED STATIC REVIEWS -->
 <section class="featured">
+  <h2>⭐ Featured Reviews</h2>
 
-<h2>⭐ Featured Reviews</h2>
+  <div class="movie-grid">
 
-<div class="movie-grid">
+    <div class="movie-card">
+      <img src="images/movie1.jpg" alt="Dune Part Two">
+      <h3>Dune Part Two</h3>
+      <p>⭐⭐⭐⭐⭐</p>
+    </div>
 
-<div class="movie-card">
-<img src="images/movie1.jpg" alt="Dune Part Two">
-<h3>Dune Part Two</h3>
+    <div class="movie-card">
+      <img src="images/movie2.jpg" alt="Oppenheimer">
+      <h3>Oppenheimer</h3>
+      <p>⭐⭐⭐⭐⭐</p>
+    </div>
 
-<div class="stars">⭐⭐⭐⭐⭐</div>
-
-<p>
-A visually stunning sci-fi adventure with outstanding performances.
-</p>
-
-<a href="movie.html" class="review-btn">
-Read Review
-</a>
-
-</div>
-
-<div class="movie-card">
-<img src="images/movie2.jpg" alt="Oppenheimer">
-
-<h3>Oppenheimer</h3>
-
-<div class="stars">⭐⭐⭐⭐⭐</div>
-
-<p>
-Christopher Nolan's masterpiece exploring the atomic age.
-</p>
-
-<a href="movie.html" class="review-btn">
-Read Review
-</a>
-
-</div>
-
-<div class="movie-card">
-<img src="images/movie3.jpg" alt="Deadpool">
-
-<h3>Deadpool & Wolverine</h3>
-
-<div class="stars">⭐⭐⭐⭐☆</div>
-
-<p>
-Action-packed superhero entertainment with hilarious comedy.
-</p>
-
-<a href="movie.html" class="review-btn">
-Read Review
-</a>
-
-</div>
-
-</div>
-
-</section>
-<section class="trending">
-  <h2>🔥 Trending Movies</h2>
-
-  
+    <div class="movie-card">
+      <img src="images/movie3.jpg" alt="Deadpool & Wolverine">
+      <h3>Deadpool & Wolverine</h3>
+      <p>⭐⭐⭐⭐☆</p>
+    </div>
 
   </div>
 </section>
 
-<section class="featured">
+<!-- DYNAMIC MOVIES (TMDB) -->
+<section class="trending">
+  <h2>🔥 Popular Movies</h2>
 
-<h2>Why Choose CineVerse?</h2>
-
-<p>
-CineVerse provides honest movie reviews, ratings, trailers, cast information, and the latest entertainment news. Our goal is to help movie lovers discover the best films with original and informative content.
-</p>
-
+  <div class="movie-grid" id="movie-grid">
+    <!-- JS will load movies here -->
+  </div>
 </section>
 
-  <section class="trending">
-
-<h2>🔥 Popular Movies</h2>
-
-<div class="movie-grid" id="movie-grid">
-</div>
-
+<!-- ABOUT -->
+<section class="featured">
+  <h2>Why Choose CineVerse?</h2>
+  <p>
+    CineVerse provides honest movie reviews, ratings, trailers, cast information, and latest entertainment news.
+  </p>
 </section>
 
 <footer>
+  <p>© 2026 CineVerse. All Rights Reserved.</p>
 
-<p>© 2026 CineVerse. All Rights Reserved.</p>
-
-<p>
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a> |
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms & Conditions</a> |
-<a href="disclaimer.html">Disclaimer</a>
-</p>
-
+  <p>
+    <a href="about.html">About</a> |
+    <a href="contact.html">Contact</a> |
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms</a>
+  </p>
 </footer>
 
 <script src="script.js"></script>
